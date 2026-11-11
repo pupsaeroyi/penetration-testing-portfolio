@@ -431,34 +431,3 @@ The UID changed but the GID did not: `os.setuid()` modifies user identity; it do
 | Misconfigured `CAP_SETUID` | Python 3.8 given permission to change process UIDs | Allowed launch of a UID-0 shell |
 
 **Important:** This is not evidence of a Python software vulnerability or necessarily a confirmed IDOR. The privilege escalation is a host configuration failure; the web access-control determination needs an authorization baseline.
-
-## 12. What a professional report includes versus personal notes
-
-**Professional pentest report:** Scope, executive summary, tested attack surface, findings, supporting evidence, impact, severity with reasoning, reproducibility, remediation, limitations, and validated outcome. Keep it concise and avoid showing every false start.
-
-**Learning journal / walkthrough (this file):** Exact commands, failed tests, why each decision was made, terminology, what was confusing, how tools work, and transferable principles. This is the best place for mistakes like angle brackets in Bash, forgetting the Python interpreter, and confusing FTP and SSH.
-
-**Best portfolio approach:** Publish a sanitized professional-style report for the retired machine **and** keep detailed notes so you can explain the work in interviews. Explain which steps you performed yourself versus which were coached, and don't claim official client experience or unverified flags.
-
-## 13. Reusable mini-checklist for the next Linux HTB machine
-
-- [ ] Create a dedicated machine folder; record scope and target IP.
-- [ ] Run Nmap service detection; optionally perform a full port scan if appropriate.
-- [ ] Enumerate each discovered service rather than guessing exploits.
-- [ ] For websites: map routes, parameters, authentication, downloads, and access rights.
-- [ ] For PCAPs: inspect protocols; filter traffic; Follow TCP Stream; look for plaintext-sensitive content.
-- [ ] Test discovered credentials only against authorized target services.
-- [ ] Once you have a shell: run `whoami`, `id`, `hostname`, `pwd`, `cat /etc/os-release`.
-- [ ] Enumerate sudo rights, SUID files, capabilities, services, and writable paths.
-- [ ] Form a hypothesis for every suspicious misconfiguration before exploitation.
-- [ ] Confirm escalation with `id`; do not infer root based on a prompt alone.
-- [ ] Capture redacted evidence and write both impact and remediation.
-- [ ] Record what was actually verified and what remains outstanding.
-
-## 14. One-paragraph interview explanation
-
-> “On the retired HTB Cap machine, I used Nmap to identify FTP, SSH, and a Gunicorn-based HTTP dashboard. I enumerated the dashboard's numeric capture URLs, retrieved a historical PCAP, and analyzed the FTP stream in Wireshark. It contained plaintext credentials for a successful login. After validating those credentials, I gained an SSH shell as a standard user. My Linux privilege-escalation checks showed that Python 3.8 had the `CAP_SETUID` capability, which allowed the interpreter to assume UID 0 and spawn a root shell. The key fixes would be protecting packet captures, removing plaintext credential exposure, and applying least-privilege file capabilities.”
-
----
-
-*End of observed lab walkthrough. The separate professional report omits the trial-and-error details and focuses on evidence and remediation.*
