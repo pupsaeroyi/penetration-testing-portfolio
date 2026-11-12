@@ -9,6 +9,7 @@ This repository documents my work in authorized training labs: how I enumerate s
 | Lab | Environment | Focus | Reports |
 |---|---|---|---|
 | [HTB Cap](htb-writeups/machines/cap/README.md) | Easy / Linux | Service enumeration, packet analysis, exposed FTP credentials, Linux file capabilities | [Assessment](htb-writeups/machines/cap/HTB_Cap_Professional_Pentest_Report.md) · [Learning walkthrough](htb-writeups/machines/cap/HTB_Cap_Full_Learning_Walkthrough.md) |
+| [HTB Enigma](htb-writeups/machines/enigma/README.md) | Linux | NFS, credential reuse, web application testing, SSH forwarding, command injection | [Assessment](htb-writeups/machines/enigma/HTB_Enigma_Professional_Pentest_Report.md) · [Learning walkthrough](htb-writeups/machines/enigma/HTB_Enigma_Full_Learning_Walkthrough.md) |
 
 Cap's reports document standard-user access and a verified root shell. Root flag retrieval/submission is not documented. Supporting raw evidence files are not yet included.
 

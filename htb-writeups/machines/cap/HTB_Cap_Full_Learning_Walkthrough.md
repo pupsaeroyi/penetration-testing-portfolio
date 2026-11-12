@@ -1,4 +1,4 @@
-# HTB Cap — Complete Learning Walkthrough & Personal Notes
+# HTB Cap: Complete Learning Walkthrough & Personal Notes
 
 **Date:** 11 November 2026  
 **Machine:** Cap (retired, Easy, Linux)  
@@ -65,9 +65,9 @@ What each option does:
 | `-sV` | Service/version detection |
 | `-oN initial_scan.txt` | Save normal-format output |
 | `$IP` | Expand target IP environment variable |
-| `21` | FTP — file-transfer service |
-| `22` | SSH — encrypted remote login/shell |
-| `80` | HTTP — web service, default port 80 |
+| `21` | FTP: file-transfer service |
+| `22` | SSH: encrypted remote login/shell |
+| `80` | HTTP: web service, default port 80 |
 
 **Method lesson:** An open port is a clue about an available service, **not** evidence of a vulnerability. Choose follow-up tests based on the service. This scan covered default TCP ports rather than all 65,535.
 
@@ -322,12 +322,12 @@ Returned SUID programs included `umount`, `newgrp`, `pkexec`, `mount`, `gpasswd`
 
 Breakdown:
 
-- `-type f` — regular files only.
-- `-perm -4000` — SUID permission bit is present.
-- `2>/dev/null` — suppress permission errors (stderr).
+- `-type f`: regular files only.
+- `-perm -4000`: SUID permission bit is present.
+- `2>/dev/null`: suppress permission errors (stderr).
 - This search only checked two directories; a full-disk SUID search would need a wider scope.
 
-### 9.4 Linux file capabilities — the decisive check
+### 9.4 Linux file capabilities: the decisive check
 
 ```bash
 getcap -r / 2>/dev/null
@@ -366,7 +366,7 @@ Observation: Python has CAP_SETUID
 → Verify: whoami / id
 ```
 
-Useful reference for future labs: [GTFOBins — Python](https://gtfobins.github.io/gtfobins/python/). Research a discovered permission and ask what the program is capable of doing with it; do not rely entirely on memorized exploit strings.
+Useful reference for future labs: [GTFOBins: Python](https://gtfobins.github.io/gtfobins/python/). Research a discovered permission and ask what the program is capable of doing with it; do not rely entirely on memorized exploit strings.
 
 ## 10. The final privilege escalation
 

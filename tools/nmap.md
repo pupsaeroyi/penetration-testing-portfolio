@@ -1,4 +1,4 @@
-# Nmap — reusable notes
+# Nmap: reusable notes
 
 Learned in [HTB Cap](../htb-writeups/machines/cap/README.md). Keep each machine's actual output in its own `scans/` folder.
 
@@ -25,5 +25,9 @@ This scans the default selection of 1,000 TCP ports, not every TCP port or UDP. 
 - FTP: investigate permitted authentication and file access.
 - SSH: consider shell access if valid lab credentials are obtained.
 - HTTP: inspect routes, downloads, authentication, and authorization.
+- RPC/NFS: enumerate exports and inspect permitted access, for example with `showmount -e "$IP"`.
+- IMAP/POP3: identify mail services and investigate access when authorized credentials are available.
+
+Enigma also demonstrated how service results can lead to NFS and webmail enumeration. See the [Enigma walkthrough](../htb-writeups/machines/enigma/HTB_Enigma_Full_Learning_Walkthrough.md) for the lab-specific chain.
 
 Add new reusable syntax here once; keep addresses, full outputs, and machine-specific reasoning in each lab's reports.

@@ -1,4 +1,4 @@
-# Kali Linux — reusable shell and enumeration notes
+# Kali Linux: reusable shell and enumeration notes
 
 Learned in [HTB Cap](../htb-writeups/machines/cap/README.md). These Bash/Linux utilities are not exclusive to Kali. Local setup runs on your workstation; target enumeration runs inside the authorized target shell.
 
@@ -75,3 +75,44 @@ python3 -c 'import os; print(os.getuid())'
 `-c` executes a Python source string. Python expressions such as `os.setuid(0)` are not standalone Bash commands. Interpreter paths and permissions vary by host.
 
 After a privilege change, use `id` to verify the identity; a shell prompt alone is insufficient proof.
+
+## NFS enumeration
+
+In an authorized lab, list exports and mount an available export read-only for inspection:
+
+```bash
+showmount -e "$IP"
+sudo mkdir -p /mnt/lab-nfs
+sudo mount -t nfs -o ro,vers=3,proto=tcp,mountproto=tcp "$IP:/export/path" /mnt/lab-nfs
+ls -la /mnt/lab-nfs
+sudo umount /mnt/lab-nfs
+```
+
+Replace `/export/path` with the discovered export. NFS versions and mount options depend on the server. Documents on a share can contain sensitive information, so keep credentials out of published notes.
+
+## SSH local port forwarding
+
+```bash
+ssh -N -L 1337:127.0.0.1:1337 user@target
+```
+
+This connects local port 1337 to port 1337 on the SSH server's loopback interface. Replace the account, target, and ports as needed. `-N` keeps the connection open without starting a remote shell. Browse to `http://127.0.0.1:1337` locally when the forwarded service is HTTP.
+
+## Password hashes and interactive shells
+
+In an authorized password audit, John the Ripper can test a wordlist against hashes in a local file. Protect both the hash file and recovered passwords.
+
+```bash
+john --wordlist=/path/to/wordlist hashes.txt
+john --show hashes.txt
+```
+
+Supported hash formats and input requirements depend on the installed version. A bcrypt prefix such as `$2y$` indicates a password hash, and a recovered password should be validated only within the authorized scope.
+
+A limited shell may need a pseudoterminal for interactive programs such as `su`:
+
+```bash
+python3 -c 'import pty; pty.spawn("/bin/bash")'
+```
+
+The [Enigma walkthrough](../htb-writeups/machines/enigma/HTB_Enigma_Full_Learning_Walkthrough.md) records the lab-specific use of these techniques.

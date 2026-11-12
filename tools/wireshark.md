@@ -1,4 +1,4 @@
-# Wireshark — reusable notes
+# Wireshark: reusable notes
 
 Learned in [HTB Cap](../htb-writeups/machines/cap/README.md). These are display filters and UI actions, not shell commands.
 
